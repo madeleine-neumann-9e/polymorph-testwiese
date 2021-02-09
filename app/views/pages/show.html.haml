@@ -4,6 +4,8 @@
   %b Title:
   = @page.title
 
+= link_to 'New Button', new_page_button_path(@page)
+
 = link_to 'Edit', edit_page_path(@page)
 \|
 = link_to 'Back', pages_path

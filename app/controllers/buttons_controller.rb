@@ -21,16 +21,22 @@ class ButtonsController < ApplicationController
 
   # POST /buttons or /buttons.json
   def create
+    @page = Page.find_by(id: params[:page_id])
     @button = Button.new(button_params)
 
-    respond_to do |format|
-      if @button.save
-        format.html { redirect_to @button, notice: "Button was successfully created." }
-        format.json { render :show, status: :created, location: @button }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @button.errors, status: :unprocessable_entity }
-      end
+    if @button.save
+      # @question: Muss man das wirklich so umständlich machen?
+      @section = Section.new(
+        page_id: @page.id,
+        content_element_type: "Button",
+        content_element_id: @button.id
+      )
+
+      @section.save
+
+      redirect_to page_path(@page)
+    else
+      render :new
     end
   end
 

@@ -1,3 +1,3 @@
 class Button < ApplicationRecord
-  has_many :sections, as: :content_elements
+  has_many :sections, as: :content_element
 end
