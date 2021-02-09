@@ -4,6 +4,16 @@
   %b Title:
   = @page.title
 
+
+%div
+  -# @Question: Wie komme ich jetzt an die versch. Varianten der Elemente?
+  - @page.sections.each do |section|
+    %p
+      Type:
+      = section.content_element_type
+      ID:
+      = section.content_element_id
+
 = link_to 'New Button', new_page_button_path(@page)
 
 = link_to 'Edit', edit_page_path(@page)
