@@ -30,12 +30,12 @@ ActiveRecord::Schema.define(version: 2021_02_09_213810) do
 
   create_table "sections", force: :cascade do |t|
     t.bigint "page_id", null: false
-    t.string "content_elements_type", null: false
-    t.bigint "content_elements_id", null: false
+    t.string "content_element_type", null: false
+    t.bigint "content_element_id", null: false
     t.integer "order", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["content_elements_type", "content_elements_id"], name: "index_sections_on_content_elements_type_and_content_elements_id"
+    t.index ["content_element_type", "content_element_id"], name: "index_sections_on_content_element_type_and_content_element_id"
     t.index ["page_id"], name: "index_sections_on_page_id"
   end
 
