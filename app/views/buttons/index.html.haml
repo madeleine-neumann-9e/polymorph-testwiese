@@ -1,0 +1,23 @@
+%h1 Listing buttons
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Button type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @buttons.each do |button|
+      %tr
+        %td= button.title
+        %td= button.button_type
+        %td= link_to 'Show', button
+        %td= link_to 'Edit', edit_button_path(button)
+        %td= link_to 'Destroy', button, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Button', new_button_path

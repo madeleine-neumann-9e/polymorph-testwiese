@@ -1,0 +1,16 @@
+= form_for @button do |f|
+  - if @button.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@button.errors.count, "error")} prohibited this button from being saved:"
+      %ul
+        - @button.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :button_type
+    = f.number_field :button_type
+  .actions
+    = f.submit 'Save'
