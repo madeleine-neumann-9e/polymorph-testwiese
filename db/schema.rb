@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_09_205939) do
+ActiveRecord::Schema.define(version: 2021_02_09_213810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "buttons", force: :cascade do |t|
+    t.string "title"
+    t.integer "button_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "pages", force: :cascade do |t|
     t.string "title"
@@ -21,4 +28,16 @@ ActiveRecord::Schema.define(version: 2021_02_09_205939) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "sections", force: :cascade do |t|
+    t.bigint "page_id", null: false
+    t.string "content_elements_type", null: false
+    t.bigint "content_elements_id", null: false
+    t.integer "order", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["content_elements_type", "content_elements_id"], name: "index_sections_on_content_elements_type_and_content_elements_id"
+    t.index ["page_id"], name: "index_sections_on_page_id"
+  end
+
+  add_foreign_key "sections", "pages"
 end
