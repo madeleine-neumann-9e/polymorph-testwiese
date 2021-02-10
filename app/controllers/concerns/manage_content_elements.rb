@@ -42,6 +42,7 @@ module ManageContentElements
     end
 
     def update
+
       if @content_element_type.update(content_element_type_params)
         redirect_to page_path(@page)
       else

@@ -1,4 +1,4 @@
-= form_for ([:page, @content_element_type]) do |f|
+= form_for ([@page, @content_element_type]) do |f|
   - if @content_element_type.errors.any?
     #error_explanation
       %h2= "#{pluralize(@content_element_type.errors.count, "Button error")} prohibited this button from being saved:"
