@@ -8,6 +8,7 @@
 %div
   -# @Question: Wie komme ich jetzt an die versch. Varianten der Elemente?
   - @page.sections.each do |section|
+    = render partial: "path/to/partial/for/_#{section.content_element_type.demodulize.parameterize}", locals: { content_element: section.content_element  }
     %p
       Type:
       = section.content_element_type
