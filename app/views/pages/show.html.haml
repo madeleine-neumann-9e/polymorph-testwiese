@@ -11,7 +11,7 @@
     - base_name = content_element.content_element_type_type.demodulize
     - folder = base_name.pluralize.underscore
     - file = base_name.underscore
-    = render partial: "#{folder}/#{file}", locals: { content_element_type: content_element.content_element_type  }
+    = render partial: "content_elements/#{folder}/#{file}", locals: { content_element_type: content_element.content_element_type  }
 
 %p
   = link_to 'New Button', new_page_button_path(@page)

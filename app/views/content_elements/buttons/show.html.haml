@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @content_element.title
+%p
+  %b Button type:
+  = @content_element.button_type
+
+= link_to 'Edit', edit_button_path(@content_element)
+\|
+= link_to 'Back', buttons_path

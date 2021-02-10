@@ -1,0 +1,21 @@
+= form_for ([:page, @content_element_type]) do |f|
+  - if @content_element_type.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@content_element_type.errors.count, "Button error")} prohibited this button from being saved:"
+      %ul
+        - @content_element_type.errors.full_messages.each do |message|
+          %li
+            = message
+
+  - if @content_element_type.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@content_element.errors.count, "content_element error")} prohibited this content_element from being saved:"
+      %ul
+      - @content_element.errors.full_messages.each do |message|
+        %li
+          = message
+
+  - base_name = @content_element_type.class.name.demodulize
+  - folder = base_name.pluralize.underscore
+  - file = base_name.underscore
+  = render partial: "content_elements/#{folder}/#{file}", locals: { content_element_type: content_element.content_element_type  }
