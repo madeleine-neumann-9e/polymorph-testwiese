@@ -14,9 +14,8 @@
       %tr
         %td= button.title
         %td= button.button_type
-        %td= link_to 'Show', button
-        %td= link_to 'Edit', edit_button_path(button)
-        %td= link_to 'Destroy', button, method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to 'Edit', edit_page_button_path(button)
+        %td= link_to 'Destroy', page_button(button), method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 

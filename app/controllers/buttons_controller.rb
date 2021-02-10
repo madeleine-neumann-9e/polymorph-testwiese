@@ -1,26 +1,21 @@
 class ButtonsController < ApplicationController
-  before_action :set_button, only: %i[ show edit update destroy ]
+  before_action :set_button_and_page, only: %i[ show edit update destroy ]
 
-  # GET /buttons or /buttons.json
   def index
     @buttons = Button.all
   end
 
-  # GET /buttons/1 or /buttons/1.json
   def show
   end
 
-  # GET /buttons/new
   def new
     @button = Button.new
     @section = Section.new
   end
 
-  # GET /buttons/1/edit
   def edit
   end
 
-  # POST /buttons or /buttons.json
   def create
     @page = Page.find_by(id: params[:page_id])
 
@@ -43,9 +38,6 @@ class ButtonsController < ApplicationController
     render :new
   end
 
-
-
-  # PATCH/PUT /buttons/1 or /buttons/1.json
   def update
     respond_to do |format|
       if @button.update(button_params)
@@ -58,7 +50,6 @@ class ButtonsController < ApplicationController
     end
   end
 
-  # DELETE /buttons/1 or /buttons/1.json
   def destroy
     @button.destroy
     respond_to do |format|
@@ -68,12 +59,11 @@ class ButtonsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_button
+    def set_button_and_page
       @button = Button.find(params[:id])
+      @page = @button.section.page
     end
 
-    # Only allow a list of trusted parameters through.
     def button_params
       params.require(:button).permit(:title, :button_type)
     end
