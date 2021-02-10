@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'pages#index'
 
   resources :pages do
-    resources :buttons, controller: "content_elements/buttons"
-    resources :headlines, controller: "content_elements/headlines"
+    resources :buttons
+    resources :headlines
   end
 end

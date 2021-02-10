@@ -17,5 +17,5 @@
 
   - base_name = @content_element_type.class.name.demodulize
   - folder = base_name.pluralize.underscore
-  - file = base_name.underscore
-  = render partial: "content_elements/#{folder}/#{file}", locals: { content_element_type: content_element.content_element_type  }
+
+  = render partial: "content_elements/#{folder}/form", locals: { content_element_type: @content_element_type, form: f  }
