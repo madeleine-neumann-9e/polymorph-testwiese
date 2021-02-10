@@ -13,6 +13,7 @@ class ButtonsController < ApplicationController
   # GET /buttons/new
   def new
     @button = Button.new
+    @section = Section.new
   end
 
   # GET /buttons/1/edit
@@ -22,23 +23,27 @@ class ButtonsController < ApplicationController
   # POST /buttons or /buttons.json
   def create
     @page = Page.find_by(id: params[:page_id])
+
     @button = Button.new(button_params)
 
-    if @button.save
-      # @question: Muss man das wirklich so umständlich machen?
-      @section = Section.new(
-        page_id: @page.id,
-        content_element_type: "Button",
-        content_element_id: @button.id
-      )
+    @section = Section.new(
+      page_id: @page.id,
+      content_element: @button
+    )
 
-      @section.save
-
-      redirect_to page_path(@page)
-    else
-      render :new
+    ActiveRecord::Base.transaction do
+      @button.save!
+      @section.save!
     end
+
+    redirect_to page_path(@page)
+
+  rescue ActiveRecord::RecordInvalid
+    flash.now[:error] = (@button.errors.full_messages + @section.errors.full_messages).to_sentence
+    render :new
   end
+
+
 
   # PATCH/PUT /buttons/1 or /buttons/1.json
   def update
