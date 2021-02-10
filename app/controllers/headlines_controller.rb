@@ -1,5 +1,5 @@
 class HeadlinesController < ApplicationController
-  included ManageContentElements
+  include ManageContentElements
 
   protected
     def content_element_type_params
