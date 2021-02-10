@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = content_element_type.title
+%p
+  %b Title type:
+  = content_element_type.title_type
+
+= link_to 'Edit', edit_page_headline_path(@page, content_element_type)
+\|
+= link_to 'Back', page_headlines_path(@page)

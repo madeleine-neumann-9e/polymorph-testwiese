@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_09_213810) do
+ActiveRecord::Schema.define(version: 2021_02_10_123844) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,22 +22,29 @@ ActiveRecord::Schema.define(version: 2021_02_09_213810) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "content_elements", force: :cascade do |t|
+    t.bigint "page_id", null: false
+    t.string "content_element_type_type", null: false
+    t.bigint "content_element_type_id", null: false
+    t.integer "order", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["content_element_type_type", "content_element_type_id"], name: "index__on_content_element_type_and_content_element_id"
+    t.index ["page_id"], name: "index_content_elements_on_page_id"
+  end
+
+  create_table "headlines", force: :cascade do |t|
+    t.string "title"
+    t.integer "title_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "pages", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "sections", force: :cascade do |t|
-    t.bigint "page_id", null: false
-    t.string "content_element_type", null: false
-    t.bigint "content_element_id", null: false
-    t.integer "order", default: 0, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["content_element_type", "content_element_id"], name: "index_sections_on_content_element_type_and_content_element_id"
-    t.index ["page_id"], name: "index_sections_on_page_id"
-  end
-
-  add_foreign_key "sections", "pages"
+  add_foreign_key "content_elements", "pages"
 end

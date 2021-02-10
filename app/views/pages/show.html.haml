@@ -7,13 +7,16 @@
 
 %div
   -# @Question: Wie komme ich jetzt an die versch. Varianten der Elemente?
-  - @sections.each do |section|
-    - base_name = section.content_element_type.demodulize
+  - @content_elements.each do |content_element|
+    - base_name = content_element.content_element_type_type.demodulize
     - folder = base_name.pluralize.underscore
     - file = base_name.underscore
-    = render partial: "#{folder}/#{file}", locals: { content_element: section.content_element  }
+    = render partial: "#{folder}/#{file}", locals: { content_element_type: content_element.content_element_type  }
 
-= link_to 'New Button', new_page_button_path(@page)
+%p
+  = link_to 'New Button', new_page_button_path(@page)
+%p
+  = link_to 'New Headline', new_page_headline_path(@page)
 
 = link_to 'Edit', edit_page_path(@page)
 \|

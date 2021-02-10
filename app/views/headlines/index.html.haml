@@ -1,0 +1,23 @@
+%h1 Listing headlines
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Title type
+      %th
+      %th
+      %th
+
+  %tbody
+    - @headlines.each do |headline|
+      %tr
+        %td= headline.title
+        %td= headline.title_type
+        %td= link_to 'Show', headline
+        %td= link_to 'Edit', edit_page_headline_path(@page, headline)
+        %td= link_to 'Destroy', headline, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Headline', new_headline_path

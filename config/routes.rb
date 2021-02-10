@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   resources :pages do
     resources :buttons
+    resources :headlines
   end
 end

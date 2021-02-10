@@ -10,7 +10,7 @@ class ButtonsController < ApplicationController
 
   def new
     @button = Button.new
-    @section = Section.new
+    @content_element = ContentElement.new
   end
 
   def edit
@@ -21,20 +21,20 @@ class ButtonsController < ApplicationController
 
     @button = Button.new(button_params)
 
-    @section = Section.new(
+    @content_element = ContentElement.new(
       page_id: @page.id,
-      content_element: @button
+      content_element_type: @button
     )
 
     ActiveRecord::Base.transaction do
       @button.save!
-      @section.save!
+      @content_element.save!
     end
 
     redirect_to page_path(@page)
 
   rescue ActiveRecord::RecordInvalid
-    flash.now[:error] = (@button.errors.full_messages + @section.errors.full_messages).to_sentence
+    flash.now[:error] = (@button.errors.full_messages + @content_element.errors.full_messages).to_sentence
     render :new
   end
 
@@ -61,7 +61,7 @@ class ButtonsController < ApplicationController
   private
     def set_button_and_page
       @button = Button.find(params[:id])
-      @page = @button.section.page
+      @page = @button.content_element.page
     end
 
     def button_params

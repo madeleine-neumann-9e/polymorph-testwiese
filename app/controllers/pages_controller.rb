@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   # GET /pages/1 or /pages/1.json
   def show
     @page = Page.find(params[:id])
-    @sections = @page.sections.order(:order)
+    @content_elements = @page.content_elements.order(:order)
   end
 
   # GET /pages/new
